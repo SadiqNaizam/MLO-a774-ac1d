@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Link } from 'react-router-dom'; // Added import
+import { Link } from 'react-router-dom'; 
 
 interface TopHeaderProps {
   className?: string;
@@ -25,7 +25,7 @@ const TopHeader: React.FC<TopHeaderProps> = ({ className, onMenuToggle, theme, t
   return (
     <header
       className={cn(
-        'sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-card px-4 md:px-6', // z-30 to be below mobile sidebar (z-50) and backdrop (z-40)
+        'sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-card px-4 md:px-6 backdrop-blur-lg', // Added backdrop-blur-lg. bg-card will be semi-transparent due to index.css
         className
       )}
     >
@@ -37,18 +37,18 @@ const TopHeader: React.FC<TopHeaderProps> = ({ className, onMenuToggle, theme, t
         {/* Brand Logo visible on larger screens, sidebar has it for smaller screens */}
         <div className="hidden md:flex items-center space-x-2 mr-6">
             <Box className="h-8 w-8 text-primary" /> 
-            <span className="font-bold text-xl">DO</span>
+            <span className="font-bold text-xl text-foreground">DO</span> {/* Ensuring text uses foreground */}
         </div>
         <div className="relative w-full max-w-xs hidden sm:block">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input type="search" placeholder="Search..." className="pl-9" />
+          <Input type="search" placeholder="Search..." className="pl-9 bg-background/50" /> {/* Input with slight transparency */}
         </div>
       </div>
 
       <div className="flex items-center space-x-3 md:space-x-4">
         {toggleTheme && (
           <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+            {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}\
           </Button>
         )}
 
@@ -59,26 +59,26 @@ const TopHeader: React.FC<TopHeaderProps> = ({ className, onMenuToggle, theme, t
               <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="backdrop-blur-md"> {/* Added backdrop-blur to content */}
             <DropdownMenuItem>New Lead</DropdownMenuItem>
             <DropdownMenuItem>New Task</DropdownMenuItem>
             <DropdownMenuItem>New Contact</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon">\
           <Bell className="h-5 w-5" />
           <span className="sr-only">Notifications</span>
         </Button>
 
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Avatar className="h-9 w-9 cursor-pointer">
+          <DropdownMenuTrigger asChild>\
+            <Avatar className="h-9 w-9 cursor-pointer">\
               <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="backdrop-blur-md"> {/* Added backdrop-blur to content */}
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
