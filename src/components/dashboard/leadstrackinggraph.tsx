@@ -35,7 +35,7 @@ const LeadsTrackingGraph: React.FC<LeadsTrackingGraphProps> = ({ className }) =>
   // TODO: Implement data filtering based on timeRange if needed
 
   return (
-    <Card className={cn('bg-card shadow-sm', className)}>
+    <Card className={cn('bg-card shadow-sm backdrop-blur-lg', className)}> {/* Added backdrop-blur-lg */}
       <CardHeader className="flex flex-row items-start justify-between pb-4">
         <div>
           <CardTitle className="text-xl font-semibold text-primary-text">Leads tracking</CardTitle>
@@ -45,11 +45,11 @@ const LeadsTrackingGraph: React.FC<LeadsTrackingGraphProps> = ({ className }) =>
           </div>
         </div>
         <Select value={timeRange} onValueChange={setTimeRange}>
-          <SelectTrigger className="w-[180px] text-muted-foreground">
+          <SelectTrigger className="w-[180px] text-muted-foreground bg-transparent hover:bg-muted/30"> {/* Adjusted SelectTrigger background */}
             <CalendarDays className="mr-2 h-4 w-4" />
             <SelectValue placeholder="Select period" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="backdrop-blur-md"> {/* Added backdrop-blur-md */}
             <SelectItem value="last_30_days">Last 30 days</SelectItem>
             <SelectItem value="last_3_months">Last 3 months</SelectItem>
             <SelectItem value="last_6_months">Last 6 months</SelectItem>
@@ -77,11 +77,14 @@ const LeadsTrackingGraph: React.FC<LeadsTrackingGraphProps> = ({ className }) =>
             />
             <Tooltip
               contentStyle={{ 
-                backgroundColor: 'hsl(var(--card))',
+                backgroundColor: 'hsl(var(--popover) / 0.8)', // Popover with alpha for Tooltip
                 borderColor: 'hsl(var(--border))',
                 borderRadius: 'var(--radius)',
+                backdropFilter: 'blur(8px)', // explicit blur for recharts tooltip
+                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
               }}
-              labelStyle={{ color: 'hsl(var(--foreground))' }}
+              labelStyle={{ color: 'hsl(var(--popover-foreground))' }}
+              cursor={{fill: 'hsl(var(--accent) / 0.2)'}}
             />
             <Legend 
               verticalAlign="top" 
@@ -90,17 +93,17 @@ const LeadsTrackingGraph: React.FC<LeadsTrackingGraphProps> = ({ className }) =>
               wrapperStyle={{ paddingBottom: '20px' }}
               formatter={(value, entry) => {
                 const { color } = entry;
-                return <span style={{ color }}>{value.replace('closedW', 'Closed W').replace('closedL', 'Closed L')}</span>;
+                return <span style={{ color: color === 'hsl(var(--primary))' || color === 'hsl(var(--destructive))' ? color : 'hsl(var(--foreground))' }}>{value.replace('closedW', 'Closed W').replace('closedL', 'Closed L')}</span>;
               }}
             />
-            <defs>
+            <defs>\
               <linearGradient id="colorClosedWon" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.4}/>
-                <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
+                <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.5}/>
+                <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.1}/>
               </linearGradient>
               <linearGradient id="colorClosedLost" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="hsl(var(--destructive))" stopOpacity={0.4}/>
-                <stop offset="95%" stopColor="hsl(var(--destructive))" stopOpacity={0}/>
+                <stop offset="5%" stopColor="hsl(var(--destructive))" stopOpacity={0.5}/>
+                <stop offset="95%" stopColor="hsl(var(--destructive))" stopOpacity={0.1}/>
               </linearGradient>
             </defs>
             <Area type="monotone" dataKey="closedWon" stroke="hsl(var(--primary))" fillOpacity={1} fill="url(#colorClosedWon)" strokeWidth={2} name="Closed won" dot={{ r:4, strokeWidth:2, fill: 'hsl(var(--primary))' }} activeDot={{ r: 6, strokeWidth:2, fill: 'hsl(var(--background))', stroke: 'hsl(var(--primary))' }}/>
