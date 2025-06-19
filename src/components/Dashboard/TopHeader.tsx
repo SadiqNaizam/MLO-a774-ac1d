@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { Menu, Search, Bell, ChevronDown, Box } from 'lucide-react';
+import { Menu, Search, Bell, ChevronDown, Box, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -16,13 +16,15 @@ import {
 interface TopHeaderProps {
   className?: string;
   onMenuToggle?: () => void;
+  theme?: 'light' | 'dark';
+  toggleTheme?: () => void;
 }
 
-const TopHeader: React.FC<TopHeaderProps> = ({ className, onMenuToggle }) => {
+const TopHeader: React.FC<TopHeaderProps> = ({ className, onMenuToggle, theme, toggleTheme }) => {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 flex h-16 items-center justify-between border-b bg-card px-4 md:px-6',
+        'sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-card px-4 md:px-6', // z-30 to be below mobile sidebar (z-50) and backdrop (z-40)
         className
       )}
     >
@@ -43,6 +45,12 @@ const TopHeader: React.FC<TopHeaderProps> = ({ className, onMenuToggle }) => {
       </div>
 
       <div className="flex items-center space-x-3 md:space-x-4">
+        {toggleTheme && (
+          <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme">
+            {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+          </Button>
+        )}
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="default" className="bg-primary hover:bg-primary/90 text-primary-foreground">
