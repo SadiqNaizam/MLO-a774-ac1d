@@ -35,7 +35,7 @@ interface ReasonsSummaryProps {
 const ReasonsSummary: React.FC<ReasonsSummaryProps> = ({ className }) => {
   return (
     <div className={cn('grid grid-cols-1 lg:grid-cols-2 gap-6', className)}>
-      <Card className="bg-card shadow-sm">
+      <Card className="bg-card shadow-sm backdrop-blur-lg"> {/* Added backdrop-blur-lg */}
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-primary-text">Reasons of leads lost</CardTitle>
         </CardHeader>
@@ -47,11 +47,11 @@ const ReasonsSummary: React.FC<ReasonsSummaryProps> = ({ className }) => {
               </div>
               <p className="text-sm text-muted-foreground flex-1">{item.reason}</p>
             </div>
-          ))}
+          ))}\
         </CardContent>
       </Card>
 
-      <Card className="bg-card shadow-sm">
+      <Card className="bg-card shadow-sm backdrop-blur-lg"> {/* Added backdrop-blur-lg */}
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-primary-text">Other data</CardTitle>
         </CardHeader>
@@ -67,15 +67,15 @@ const ReasonsSummary: React.FC<ReasonsSummaryProps> = ({ className }) => {
                       <TooltipTrigger asChild>
                         <Info className="h-3 w-3 ml-1.5 text-muted-foreground cursor-help" />
                       </TooltipTrigger>
-                      <TooltipContent side="top" className="bg-card text-foreground p-2 rounded-md shadow-lg max-w-xs">
+                      <TooltipContent side="top" className="bg-popover text-popover-foreground p-2 rounded-md shadow-lg max-w-xs backdrop-blur-md"> {/* Added backdrop-blur-md */}
                         <p>{item.tooltip}</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                )}
+                )}\
               </div>
             </div>
-          ))}
+          ))}\
         </CardContent>
       </Card>
     </div>
