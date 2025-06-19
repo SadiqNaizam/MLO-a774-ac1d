@@ -74,7 +74,7 @@ const DashboardOverviewPage: React.FC = () => {
   const displayedSourcesData = initialSourcesData;
 
   const renderFunnelStageProgress = () => (
-    <div className="flex w-full h-3 rounded-full overflow-hidden my-2 bg-muted">
+    <div className="flex w-full h-3 rounded-full overflow-hidden my-2 bg-muted/70"> {/* Adjusted bg-muted opacity */}
       {funnelStagesData.map((stage) => (
         <TooltipProvider key={stage.id} delayDuration={200}>
           <Tooltip>
@@ -85,12 +85,12 @@ const DashboardOverviewPage: React.FC = () => {
                 aria-label={`${stage.name}: ${stage.count} leads`}
               />
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className="backdrop-blur-md"> {/* Added backdrop-blur-md */}
               <p>{stage.name}: {stage.count} leads ({((stage.count / totalActiveLeads) * 100).toFixed(1)}%)</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-      ))}
+      ))}\
     </div>
   );
 
@@ -131,6 +131,7 @@ const DashboardOverviewPage: React.FC = () => {
 
         {activeTab === 'leads' && (
           <div className="flex flex-col gap-6">
+            {/* StatCard already has backdrop-blur-lg from its definition */}
             <StatsCardGrid>
               <StatCard 
                 title="Funnel count"
@@ -151,11 +152,11 @@ const DashboardOverviewPage: React.FC = () => {
                           <TooltipProvider delayDuration={200}>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <span className="text-xs bg-foreground text-background px-1.5 py-0.5 rounded cursor-default tabular-nums w-[50px] text-center">
+                                <span className="text-xs bg-foreground/80 text-background px-1.5 py-0.5 rounded cursor-default tabular-nums w-[50px] text-center"> {/* Adjusted bg opacity */}
                                   {stage.duration}
                                 </span>
                               </TooltipTrigger>
-                              <TooltipContent side="top">
+                              <TooltipContent side="top" className="backdrop-blur-md"> {/* Added backdrop-blur-md */}
                                 <p>Average time on this stage</p>
                               </TooltipContent>
                             </Tooltip>
@@ -173,11 +174,11 @@ const DashboardOverviewPage: React.FC = () => {
                 title="Sources"
                 action={
                   <Select value={currentSourceTimeRange} onValueChange={(value) => setCurrentSourceTimeRange(value as typeof sourceTimeRanges[number]['value'])}>
-                    <SelectTrigger className="w-auto md:w-[150px] text-xs h-9">
+                    <SelectTrigger className="w-auto md:w-[150px] text-xs h-9 bg-transparent hover:bg-muted/30"> {/* Adjusted SelectTrigger background */}
                       <CalendarDays className="mr-1.5 h-3.5 w-3.5 text-muted-foreground" />
                       <SelectValue placeholder="Select period" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="backdrop-blur-md"> {/* Added backdrop-blur-md */}
                       {sourceTimeRanges.map(option => (
                         <SelectItem key={option.value} value={option.value} className="text-xs">
                           {option.label}
@@ -207,13 +208,15 @@ const DashboardOverviewPage: React.FC = () => {
                       <RechartsTooltip
                         formatter={(value: number, name: string) => [`${value}%`, name.charAt(0).toUpperCase() + name.slice(1)]}
                         contentStyle={{
-                          backgroundColor: 'hsl(var(--popover))',
+                          backgroundColor: 'hsl(var(--popover) / 0.8)', // Popover with alpha for Tooltip
                           borderColor: 'hsl(var(--border))',
                           borderRadius: 'var(--radius)',
                           color: 'hsl(var(--popover-foreground))',
                           boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+                          backdropFilter: 'blur(8px)', // explicit blur for recharts tooltip
                         }}
                         labelStyle={{ fontWeight: '500' }}
+                        cursor={{fill: 'hsl(var(--accent) / 0.2)'}}
                       />
                     </PieChart>
                   </ResponsiveContainer>
@@ -236,7 +239,7 @@ const DashboardOverviewPage: React.FC = () => {
                        key={opt.value} 
                        value={opt.value} 
                        aria-label={opt.label}
-                       className="text-xs px-2 py-1.5 data-[state=on]:bg-muted data-[state=on]:text-primary data-[state=on]:font-semibold hover:bg-muted/80 h-auto flex-1 border border-transparent data-[state=on]:border-border"
+                       className="text-xs px-2 py-1.5 data-[state=on]:bg-muted data-[state=on]:text-primary data-[state=on]:font-semibold hover:bg-muted/50 h-auto flex-1 border border-transparent data-[state=on]:border-border" // Adjusted hover
                      >
                        {opt.label}
                      </ToggleGroupItem>
@@ -245,13 +248,13 @@ const DashboardOverviewPage: React.FC = () => {
               </StatCard>
             </StatsCardGrid>
 
-            <LeadsTrackingGraph />
-            <ReasonsSummary />
+            <LeadsTrackingGraph /> {/* StatCard inside this already has blur */}
+            <ReasonsSummary /> {/* StatCard inside this already has blur */}
           </div>
         )}
 
         {activeTab === 'sales' && (
-          <Card className="shadow-sm">
+          <Card className="shadow-sm backdrop-blur-lg"> {/* Added backdrop-blur-lg */}
             <CardHeader>
               <CardTitle className="text-2xl font-semibold text-primary-text">Sales Overview</CardTitle>
               <CardDescription className="text-muted-foreground mt-1">
@@ -264,28 +267,28 @@ const DashboardOverviewPage: React.FC = () => {
                 This section is currently a placeholder for future development.
               </p>
               <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
+                {[\
                   { title: "Total Revenue", value: "$1,250,800", change: "+12.5%", icon: TrendingUp, iconColor: "text-success" },
                   { title: "New Customers", value: "320", change: "+8.2%", icon: Users, iconColor: "text-success" },
-                  { title: "Avg. Deal Size", value: "$3,908", change: "-1.1%", icon: TrendingDown, iconColor: "text-destructive" }
+                  { title: "Avg. Deal Size", value: "$3,908", change: "-1.1%", icon: TrendingDown, iconColor: "text-destructive" }\
                 ].map((item, i) => (
-                  <Card key={i} className="bg-card">
+                  <Card key={i} className="bg-card backdrop-blur-lg"> {/* Added backdrop-blur-lg to inner cards too */}
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium text-muted-foreground">{item.title}</CardTitle>
                       <item.icon className={cn("h-4 w-4", item.iconColor)} />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold text-primary-text">{item.value}</div>
-                      <p className={cn("text-xs", item.iconColor)}>
+                      <p className={cn("text-xs", item.iconColor)}>\
                         {item.change} from last month
                       </p>
                     </CardContent>
                   </Card>
-                ))}
+                ))}\
               </div>
             </CardContent>
           </Card>
-        )}
+        )}\
       </div>
     </MainAppLayout>
   );
