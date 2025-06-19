@@ -7,20 +7,22 @@
     --background: 0 0% 96.1%; /* PRD #F5F5F5 */
     --foreground: 0 0% 0%;    /* PRD #000000 */
 
-    --card: 0 0% 100%;        /* PRD #FFFFFF */
-    --card-foreground: 0 0% 0%; /* PRD #000000 */
+    /* Glassmorphism: Card background with alpha for transparency */
+    --card: 0 0% 100% / 0.55;        /* PRD #FFFFFF at 55% opacity */
+    --card-foreground: 0 0% 0%; /* PRD #000000 - remains opaque */
 
-    --popover: 0 0% 100%;       /* PRD #FFFFFF */
-    --popover-foreground: 0 0% 0%; /* PRD #000000 */
+    /* Glassmorphism: Popover background with alpha for transparency */
+    --popover: 0 0% 100% / 0.75;       /* PRD #FFFFFF at 75% opacity (more opaque for readability) */
+    --popover-foreground: 0 0% 0%; /* PRD #000000 - remains opaque */
 
     --primary: 217.1 100% 47.6%; /* PRD #0070F3 (accent) */
     --primary-foreground: 0 0% 100%; /* PRD #FFFFFF (on accent) */
 
-    --secondary: 0 0% 89.8%;    /* PRD #E5E5E5 (sidebar color, used for secondary component bg) */
+    --secondary: 0 0% 89.8% / 0.7;    /* PRD #E5E5E5 at 70% opacity */
     --secondary-foreground: 0 0% 0%; /* PRD #000000 (on secondary bg) */
 
-    --muted: 0 0% 89.8%;        /* PRD #E5E5E5 (sidebar color, used for muted component bg) */
-    --muted-foreground: 0 0% 40%; /* PRD #666666 (secondaryText) */
+    --muted: 0 0% 89.8% / 0.7;        /* PRD #E5E5E5 at 70% opacity */
+    --muted-foreground: 0 0% 30%; /* PRD #666666 - slightly darker for better contrast */
 
     --accent: 145.1 58.1% 49.2%;  /* PRD #34C759 (accentSecondary) */
     --accent-foreground: 0 0% 0%;  /* PRD #000000 (primaryText on accentSecondary) */
@@ -28,8 +30,9 @@
     --destructive: 0 100% 66.7%; /* PRD #FF5555 (error) */
     --destructive-foreground: 0 0% 100%; /* PRD #FFFFFF (on error) */
 
-    --border: 0 0% 85.5%;      /* PRD #DADADA */
-    --input: 0 0% 85.5%;       /* PRD #DADADA (assuming same as border) */
+    /* Glassmorphism: Border with alpha */
+    --border: 0 0% 85.5% / 0.3;      /* PRD #DADADA at 30% opacity */
+    --input: 0 0% 85.5% / 0.2;       /* PRD #DADADA at 20% opacity for input field fill */
     --ring: 217.1 100% 47.6%;   /* PRD #0070F3 (accent, for focus rings) */
 
     --radius: 0.375rem; /* PRD effects.borderRadius.default: "rounded-md" (0.375rem) */
@@ -37,19 +40,19 @@
     /* Custom variables from PRD */
     --font-sans: "Inter", system-ui, sans-serif; /* PRD typography.primaryFont */
     --primary-text-color: 0 0% 0%; /* PRD #000000 */
-    --secondary-text-color: 0 0% 40%; /* PRD #666666 */
+    --secondary-text-color: 0 0% 30%; /* PRD #666666 - slightly darker */
     --success-color: 134.4 60.7% 40.6%; /* PRD #28A745 */
     
-    /* Sidebar specific colors from PRD & existing structure */
-    --sidebar-background: 0 0% 89.8%; /* PRD #E5E5E5 (sidebar) */
+    /* Glassmorphism: Sidebar specific colors with alpha */
+    --sidebar-background: 0 0% 92% / 0.45; /* Lighter gray #EBEBEB at 45% opacity */
     --sidebar-foreground: 0 0% 0%;    /* PRD #000000 (primaryText on sidebar) */
     
     /* Sidebar interaction states - derived from main theme for consistency */
     --sidebar-primary: 217.1 100% 47.6%; /* Use main primary color for active items */
     --sidebar-primary-foreground: 0 0% 100%; /* Text on active item */
-    --sidebar-accent: 0 0% 85.5%; /* Slightly darker than sidebar-bg or a lighter primary for hover */
+    --sidebar-accent: 0 0% 85.5% / 0.5; /* Slightly darker than sidebar-bg or a lighter primary for hover with alpha */
     --sidebar-accent-foreground: 0 0% 0%; /* Text on hover */
-    --sidebar-border: 0 0% 85.5%;          /* PRD #DADADA */
+    --sidebar-border: 0 0% 85.5% / 0.2; /* PRD #DADADA at 20% opacity */
     --sidebar-ring: 217.1 100% 47.6%;     /* PRD #0070F3 for focus */
   }
 
@@ -57,45 +60,48 @@
     --background: 0 0% 12%;
     --foreground: 0 0% 98%;
 
-    --card: 0 0% 16%;
-    --card-foreground: 0 0% 98%;
+    /* Glassmorphism: Card background with alpha for transparency - Dark Theme */
+    --card: 0 0% 10% / 0.55; /* Darker base (10%) at 55% opacity */
+    --card-foreground: 0 0% 98%; /* Remains opaque */
 
-    --popover: 0 0% 16%;
-    --popover-foreground: 0 0% 98%;
+    /* Glassmorphism: Popover background with alpha for transparency - Dark Theme */
+    --popover: 0 0% 10% / 0.75; /* Darker base (10%) at 75% opacity */
+    --popover-foreground: 0 0% 98%; /* Remains opaque */
 
-    --primary: 217.1 100% 47.6%; /* Keeping original blue, ensure contrast with --primary-foreground */
-    --primary-foreground: 0 0% 100%; /* White text, already good */
+    --primary: 217.1 100% 47.6%; 
+    --primary-foreground: 0 0% 100%; 
 
-    --secondary: 0 0% 24%;
+    --secondary: 0 0% 24% / 0.7; /* 70% opacity */
     --secondary-foreground: 0 0% 90%;
 
-    --muted: 0 0% 24%;
-    --muted-foreground: 0 0% 65%; /* Lighter than light mode's muted-foreground */
+    --muted: 0 0% 24% / 0.7; /* 70% opacity */
+    --muted-foreground: 0 0% 75%; /* Lighter for better contrast */
 
-    --accent: 145.1 58.1% 49.2%; /* Keeping original green */
-    --accent-foreground: 0 0% 100%; /* White text on accent for better dark mode contrast */
+    --accent: 145.1 58.1% 49.2%; 
+    --accent-foreground: 0 0% 100%; 
 
-    --destructive: 0 100% 66.7%; /* Keeping original red */
-    --destructive-foreground: 0 0% 100%; /* White text, already good */
+    --destructive: 0 100% 66.7%; 
+    --destructive-foreground: 0 0% 100%; 
 
-    --border: 0 0% 22%;
-    --input: 0 0% 22%;
-    --ring: 217.1 100% 47.6%; /* Ring color to match primary */
+    /* Glassmorphism: Border with alpha - Dark Theme */
+    --border: 0 0% 30% / 0.3; /* Darker border base at 30% opacity */
+    --input: 0 0% 30% / 0.2; /* Darker input fill base at 20% opacity */
+    --ring: 217.1 100% 47.6%; 
 
     /* Custom variables for dark theme */
-    --primary-text-color: 0 0% 98%; /* Matches --foreground */
-    --secondary-text-color: 0 0% 65%; /* Matches --muted-foreground */
-    --success-color: 134.4 60.7% 40.6%; /* Keeping original success green */
+    --primary-text-color: 0 0% 98%; 
+    --secondary-text-color: 0 0% 75%; /* Lighter */
+    --success-color: 134.4 60.7% 40.6%; 
     
-    /* Sidebar specific colors for dark theme */
-    --sidebar-background: 0 0% 10%; 
-    --sidebar-foreground: 0 0% 85%; 
+    /* Glassmorphism: Sidebar specific colors for dark theme with alpha */
+    --sidebar-background: 0 0% 8% / 0.45; /* Darker base (8%) at 45% opacity */
+    --sidebar-foreground: 0 0% 90%; 
     
     --sidebar-primary: 217.1 100% 47.6%; 
     --sidebar-primary-foreground: 0 0% 100%; 
-    --sidebar-accent: 0 0% 20%; 
+    --sidebar-accent: 0 0% 20% / 0.5; /* 50% opacity */
     --sidebar-accent-foreground: 0 0% 98%; 
-    --sidebar-border: 0 0% 22%; 
+    --sidebar-border: 0 0% 30% / 0.2; /* 20% opacity */
     --sidebar-ring: 217.1 100% 47.6%; 
   }
 }
