@@ -53,8 +53,51 @@
     --sidebar-ring: 217.1 100% 47.6%;     /* PRD #0070F3 for focus */
   }
 
-  /* Dark mode variables are removed as PRD does not specify dark theme colors. 
-     If dark mode is added later, .dark variables should be defined here. */
+  .dark {
+    --background: 0 0% 12%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 16%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 16%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 217.1 100% 47.6%; /* Keeping original blue, ensure contrast with --primary-foreground */
+    --primary-foreground: 0 0% 100%; /* White text, already good */
+
+    --secondary: 0 0% 24%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 0 0% 24%;
+    --muted-foreground: 0 0% 65%; /* Lighter than light mode's muted-foreground */
+
+    --accent: 145.1 58.1% 49.2%; /* Keeping original green */
+    --accent-foreground: 0 0% 100%; /* White text on accent for better dark mode contrast */
+
+    --destructive: 0 100% 66.7%; /* Keeping original red */
+    --destructive-foreground: 0 0% 100%; /* White text, already good */
+
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 217.1 100% 47.6%; /* Ring color to match primary */
+
+    /* Custom variables for dark theme */
+    --primary-text-color: 0 0% 98%; /* Matches --foreground */
+    --secondary-text-color: 0 0% 65%; /* Matches --muted-foreground */
+    --success-color: 134.4 60.7% 40.6%; /* Keeping original success green */
+    
+    /* Sidebar specific colors for dark theme */
+    --sidebar-background: 0 0% 10%; 
+    --sidebar-foreground: 0 0% 85%; 
+    
+    --sidebar-primary: 217.1 100% 47.6%; 
+    --sidebar-primary-foreground: 0 0% 100%; 
+    --sidebar-accent: 0 0% 20%; 
+    --sidebar-accent-foreground: 0 0% 98%; 
+    --sidebar-border: 0 0% 22%; 
+    --sidebar-ring: 217.1 100% 47.6%; 
+  }
 }
 
 @layer base {
