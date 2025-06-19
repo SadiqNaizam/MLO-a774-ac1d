@@ -61,13 +61,21 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+        /* Custom colors from PRD */
+        'primary-text': 'hsl(var(--primary-text-color))',
+        'secondary-text': 'hsl(var(--secondary-text-color))',
+        success: 'hsl(var(--success-color))'
 			},
 			borderRadius: {
+        /* Standard Shadcn/ui setup, uses --radius from CSS (set to 0.375rem based on PRD) */
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
+      fontFamily: {
+        sans: ['var(--font-sans)', 'Inter', 'system-ui', 'sans-serif'],
+      },
 			keyframes: {
 				'accordion-down': {
 					from: {
