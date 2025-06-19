@@ -48,7 +48,7 @@ const MainAppLayout: React.FC<MainAppLayoutProps> = ({ children }) => {
   return (
     <div className="grid grid-rows-[auto_1fr] md:grid-cols-[auto_1fr] h-screen w-full overflow-hidden bg-background">
       {/* Desktop Sidebar */}
-      <div className="row-span-2 hidden md:block border-r border-border bg-sidebar">
+      <div className="row-span-2 hidden md:block border-r border-border bg-sidebar backdrop-blur-lg">
         <Sidebar className="h-full" />
       </div>
 
@@ -57,7 +57,7 @@ const MainAppLayout: React.FC<MainAppLayoutProps> = ({ children }) => {
         className={cn(
           "fixed inset-y-0 left-0 z-50 transform transition-transform ease-in-out duration-300 md:hidden",
           isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full",
-          "w-64 bg-sidebar border-r border-border"
+          "w-64 bg-sidebar border-r border-border backdrop-blur-lg" // Added backdrop-blur-lg
         )}
         role="dialog"
         aria-modal="true"
@@ -69,7 +69,7 @@ const MainAppLayout: React.FC<MainAppLayoutProps> = ({ children }) => {
       {/* Backdrop for Mobile Sidebar */}
       {isMobileSidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm md:hidden" // Slightly blurred backdrop
           onClick={toggleMobileSidebar}
           aria-hidden="true"
         />
@@ -79,7 +79,7 @@ const MainAppLayout: React.FC<MainAppLayoutProps> = ({ children }) => {
       <div className="col-start-1 md:col-start-2 row-start-1">
         <Header 
           onMenuToggle={toggleMobileSidebar} 
-          className="border-b border-border"
+          className="border-b border-border" // backdrop-blur will be added in Header component
           theme={theme}
           toggleTheme={toggleTheme}
         />
