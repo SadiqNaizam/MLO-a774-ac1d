@@ -26,7 +26,7 @@ const StatCard: React.FC<StatCardProps> = ({
   contentClassName
 }) => {
   return (
-    <Card className={cn('bg-card shadow-sm', className)}>
+    <Card className={cn('bg-card shadow-sm backdrop-blur-lg', className)}> {/* Added backdrop-blur-lg */}
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <div>
           <CardTitle className="text-lg font-semibold text-primary-text">{title}</CardTitle>
